@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Инди-каталог | INDIGO</title>
+
+</head>
+<body>
+
+<header class="site-header">
+    <div class="header-content">
+        <div class="site-logo">
+            <div class="logo-icon">I</div>
+            <h1 class="site-title">Инди-каталог</h1>
+        </div>
+        <button class="burger-btn" id="burgerBtn">
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+        </button>
+    </div>
+    <div class="header-stats">
+        <div class="stat-item">
+            <span class="stat-number" id="totalGamesCount">0</span>
+            <span class="stat-label">инди-игр</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number" id="totalGenresCount">0</span>
+            <span class="stat-label">жанров</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number" id="totalPlatformsCount">0</span>
+            <span class="stat-label">платформ</span>
+        </div>
+    </div>
+</header>
+
+<!-- ДЕСКТОПНЫЕ ФИЛЬТРЫ -->
+<div class="desktop-filters">
+    <div class="filter-group">
+        <label>🎭 Жанр</label>
+        <select id="genreFilterDesktop" class="filter-select">
+            <option value="all">Все жанры</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>📀 Платформа</label>
+        <select id="platformFilterDesktop" class="filter-select">
+            <option value="all">Все платформы</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>⭐ Мин. рейтинг</label>
+        <select id="ratingFilterDesktop" class="filter-select">
+            <option value="0">Любой</option>
+            <option value="8">8+ (отлично)</option>
+            <option value="9">9+ (шедевр)</option>
+            <option value="10">10 (идеал)</option>
+        </select>
+    </div>
+    <button id="resetFiltersDesktop" class="reset-filter-btn">Сбросить</button>
+    <div class="filter-stats">📊 <span id="gamesCountDesktop">0</span> игр</div>
+</div>
+
+<!-- БУРГЕР-МЕНЮ -->
+<div class="burger-menu" id="burgerMenu">
+    <div class="burger-header">
+        <h3>Фильтры</h3>
+        <button class="burger-close" id="burgerCloseBtn">&times;</button>
+    </div>
+    <div class="filter-section">
+        <label>🎭 Жанр</label>
+        <select id="genreFilterMobile" class="filter-select">
+            <option value="all">Все жанры</option>
+        </select>
+    </div>
+    <div class="filter-section">
+        <label>📀 Платформа</label>
+        <select id="platformFilterMobile" class="filter-select">
+            <option value="all">Все платформы</option>
+        </select>
+    </div>
+    <div class="filter-section">
+        <label>⭐ Мин. рейтинг</label>
+        <select id="ratingFilterMobile" class="filter-select">
+            <option value="0">Любой</option>
+            <option value="8">8+ (отлично)</option>
+            <option value="9">9+ (шедевр)</option>
+            <option value="10">10 (идеал)</option>
+        </select>
+    </div>
+    <button id="resetFiltersMobile" class="reset-filter-btn">Сбросить</button>
+    <div class="filter-stats">📊 <span id="gamesCountMobile">0</span> игр</div>
+</div>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<!-- КНОПКА "НАПИСАТЬ АВТОРУ" -->
+<button class="contact-btn" id="contactBtn">
+    ✉️ Написать автору
+</button>
+
+<!-- МОДАЛЬНОЕ ОКНО -->
+<div class="contact-modal" id="contactModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>📧 Написать автору</h3>
+            <button class="modal-close" id="closeModalBtn">&times;</button>
+        </div>
+        <form id="contactForm" class="contact-form">
+            <div class="form-group">
+                <label for="userEmail">Email</label>
+                <input name="email" type="email" id="userEmail" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+                <label for="projectLink">Ссылка на ваш проект</label>
+                <input name="url" type="url" id="projectLink" placeholder="https://...">
+            </div>
+            <div class="form-group">
+                <label for="message">Комментарий</label>
+                <textarea name="message" id="message" rows="4" placeholder="Расскажите о своей идее, баге или предложении..." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">📨 Отправить</button>
+        </form>
+        <div id="formStatus" class="form-status"></div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="gamesGrid" class="games-grid"></div>
+</div>
+
+
+</body>
+<footer>
+
+</footer>
+<script src="form.js"></script>
+<script src="cards.js"></script>
+</html>
