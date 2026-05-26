@@ -1,3 +1,28 @@
+
+
+const btn = document.getElementById("scrollToTop");
+
+  // Показать кнопку при прокрутке вниз
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      btn.style.display = "block";
+    } else {
+      btn.style.display = "none";
+    }
+  });
+
+  // Прокрутка вверх при клике
+  btn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+
+
+
+
 // ========== ТЕЛЕГРАМ КОНСТАНТЫ ==========
 const TOKEN = '8786272320:AAGipCblG5fQaXxLJyllD2iJN3MrC-s3LJo';
 const CHAT_ID = '6852778831';
