@@ -1,680 +1,729 @@
-const games = [
-  // === Первые 10 (оригинальные) ===
-  {
-    title: "Outer Wilds",
-    description_short: "Космическое приключение с исследованием и временными петлями.",
-    genres: ["Adventure", "Exploration", "Mystery", "Time Loop"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2019,
-    rating: 10,
-    review_text: "Шедевр, который можно пройти только один раз.",
-    review_author: "Skill Up",
-    store_links: { steam: "https://store.steampowered.com/app/753640/Outer_Wilds/" }
-  },
-  {
-    title: "Hollow Knight",
-    description_short: "Атмосферный метроидвания-платформер.",
-    genres: ["Metroidvania", "Action", "Platformer", "Dark Fantasy"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2017,
-    rating: 9,
-    review_text: "Один из лучших метроидваний за последние годы.",
-    review_author: "Skill Up",
-    store_links: { steam: "https://store.steampowered.com/app/367520/Hollow_Knight/" }
-  },
-  {
-    title: "Disco Elysium - The Final Cut",
-    description_short: "Глубокая RPG без боёв.",
-    genres: ["RPG", "Detective", "Narrative-Driven", "Philosophical"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2019,
-    rating: 10,
-    review_text: "Текстовая RPG, после которой другие игры кажутся пустыми.",
-    review_author: "Skill Up",
-    store_links: { steam: "https://store.steampowered.com/app/632470/Disco_Elysium__The_Final_Cut/" }
-  },
-  {
-    title: "Inscryption",
-    description_short: "Карточная игра с элементами хоррора.",
-    genres: ["Card Game", "Roguelike", "Horror", "Puzzle"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2021,
-    rating: 9,
-    review_text: "Не просто карточная игра, а мета-хоррор.",
-    review_author: "Skill Up",
-    store_links: { steam: "https://store.steampowered.com/app/1092790/Inscryption/" }
-  },
-  {
-    title: "Cult of the Lamb",
-    description_short: "Экшен-рогалик про управление культом.",
-    genres: ["Roguelite", "Action", "Base Building", "Simulation"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2022,
-    rating: 8,
-    review_text: "Смесь Animal Crossing и мрачного культа.",
-    review_author: "Skill Up",
-    store_links: { steam: "https://store.steampowered.com/app/1313140/Cult_of_the_Lamb/" }
-  },
-  {
-    title: "Animal Well",
-    description_short: "Стильный пиксельный платформер-головоломка.",
-    genres: ["Puzzle", "Platformer", "Exploration", "Pixel Art"],
-    platforms: ["PC", "PlayStation", "Nintendo Switch"],
-    release_year: 2024,
-    rating: 9,
-    review_text: "Одна из самых умных головоломок.",
-    review_author: "Skill Up",
-    store_links: { steam: "https://store.steampowered.com/app/813230/ANIMAL_WELL/" }
-  },
-  {
-    title: "Nine Sols",
-    description_short: "Экшен в стиле «тао-панк».",
-    genres: ["Action", "Metroidvania", "Parry-based Combat"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2024,
-    rating: 9,
-    review_text: "Если любите парировать — это ваш кандидат.",
-    review_author: "Skill Up",
-    store_links: { steam: "https://store.steampowered.com/app/1809540/Nine_Sols/" }
-  },
-  {
-    title: "Dome Keeper",
-    description_short: "Шахтерский рогалик.",
-    genres: ["Roguelite", "Mining", "Tower Defense"],
-    platforms: ["PC", "Nintendo Switch", "Mobile"],
-    release_year: 2022,
-    rating: 8,
-    review_text: "Идеальная 'ещё одна партия' игра.",
-    review_author: "Skill Up",
-    store_links: { steam: "https://store.steampowered.com/app/1637320/Dome_Keeper/" }
-  },
-  {
-    title: "The Case of the Golden Idol",
-    description_short: "Детектив в духе Return of the Obra Dinn.",
-    genres: ["Detective", "Puzzle", "Point-and-Click"],
-    platforms: ["PC", "Nintendo Switch", "Mobile"],
-    release_year: 2022,
-    rating: 9,
-    review_text: "Лучший детектив со времен Obra Dinn.",
-    review_author: "Skill Up",
-    store_links: { steam: "https://store.steampowered.com/app/1677770/The_Case_of_the_Golden_Idol/" }
-  },
-  {
-    title: "Deadlink",
-    description_short: "Быстрый киберпанк-шутер.",
-    genres: ["FPS", "Roguelite", "Cyberpunk"],
-    platforms: ["PC", "PlayStation", "Xbox"],
-    release_year: 2023,
-    rating: 8,
-    review_text: "DOOM в киберпанке.",
-    review_author: "Skill Up",
-    store_links: { steam: "https://store.steampowered.com/app/1676130/Deadlink/" }
-  },
-  // === Новые игры (без дублей) ===
-  {
-    title: "Hades",
-    description_short: "Эталонный экшен-рогалик о побеге из подземного царства с великолепным сюжетом.",
-    genres: ["Roguelite", "Action", "Mythology"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2020,
-    rating: 10,
-    review_text: "Бесконечная реиграбельность, стильный арт и захватывающая история. Одна из лучших инди-игр десятилетия.",
-    review_author: "DTF",
-    store_links: { steam: "https://store.steampowered.com/app/1145360/Hades/" }
-  },
-  {
-    title: "Slay the Spire",
-    description_short: "Родоначальник жанра карточных колодостроительных приключений.",
-    genres: ["Card Game", "Roguelike", "Strategy"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch", "Mobile"],
-    release_year: 2019,
-    rating: 9,
-    review_text: "Идеальный баланс случайности и планирования. Каждая партия уникальна.",
-    review_author: "DTF",
-    store_links: { steam: "https://store.steampowered.com/app/646570/Slay_the_Spire/" }
-  },
-  {
-    title: "Celeste",
-    description_short: "Хардкорный платформер о преодолении внутренних трудностей и подъёме на гору.",
-    genres: ["Platformer", "Precision", "Narrative"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2018,
-    rating: 10,
-    review_text: "Точнейшее управление, душевная история и музыка. Шедевр жанра.",
-    review_author: "DTF",
-    store_links: { steam: "https://store.steampowered.com/app/504230/Celeste/" }
-  },
-  {
-    title: "Subnautica",
-    description_short: "Заразительное и местами пугающее выживание в глубинах океана чужой планеты.",
-    genres: ["Survival", "Exploration", "Underwater", "Horror"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2018,
-    rating: 9,
-    review_text: "Невероятная атмосфера одиночества и страх глубин. Один из лучших симуляторов выживания.",
-    review_author: "Reddit",
-    store_links: { steam: "https://store.steampowered.com/app/264710/Subnautica/" }
-  },
-  {
-    title: "Return of the Obra Dinn",
-    description_short: "Уникальный монохромный детектив по расследованию смертей на корабле.",
-    genres: ["Puzzle", "Detective", "Mystery"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2018,
-    rating: 9,
-    review_text: "Гениальная механика восстановления событий, стиль 1-bit и потрясающая логика.",
-    review_author: "DTF",
-    store_links: { steam: "https://store.steampowered.com/app/653530/Return_of_the_Obra_Dinn/" }
-  },
-  {
-    title: "Hotline Miami",
-    description_short: "Ураганный пиксельный экшен с безумным саундтреком и ультранасилием.",
-    genres: ["Action", "Top-Down Shooter", "Fast-Paced"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch", "Mobile"],
-    release_year: 2012,
-    rating: 9,
-    review_text: "Каждый уровень — как забег на адреналине. Саундтрек и геймплей — идеальное безумие.",
-    review_author: "Reddit",
-    store_links: { steam: "https://store.steampowered.com/app/219150/Hotline_Miami/" }
-  },
-  {
-    title: "Journey",
-    description_short: "Бессловесное и невероятно красивое путешествие к далекой горе.",
-    genres: ["Adventure", "Art", "Meditative"],
-    platforms: ["PC", "PlayStation", "iOS"],
-    release_year: 2012,
-    rating: 10,
-    review_text: "Игра, которую нужно прочувствовать. Музыка и визуал — высочайший уровень.",
-    review_author: "Reddit",
-    store_links: { steam: "https://store.steampowered.com/app/638230/Journey/" }
-  },
-  // === Дополнительные (каждая только раз) ===
-  {
-    title: "The Binding of Isaac: Rebirth",
-    description_short: "Мрачный и бесконечно реиграбельный прародитель современных рогаликов.",
-    genres: ["Roguelike", "Action", "Dark Fantasy"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2014,
-    rating: 9,
-    review_text: "Тысячи предметов, библейский сюрреализм и невероятная глубина. Классика.",
-    review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/250900/The_Binding_of_Isaac_Rebirth/" }
-  },
-  {
-    title: "Dead Cells",
-    description_short: "Динамичный гибрид рогалика и метроидвании с упором на боевую систему.",
-    genres: ["Roguelite", "Metroidvania", "Action"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2018,
-    rating: 9,
-    review_text: "Идеальный темп, отзывчивое управление и море разблокируемого оружия.",
-    review_author: "IGN",
-    store_links: { steam: "https://store.steampowered.com/app/588650/Dead_Cells/" }
-  },
-  {
-    title: "Balatro",
-    description_short: "Безумно затягивающий покерный психоделический рогалик.",
-    genres: ["Card Game", "Roguelike", "Puzzle"],
-    platforms: ["PC", "Nintendo Switch"],
-    release_year: 2024,
-    rating: 9,
-    review_text: "Каждый забег уникален, числа растут, дофамин зашкаливает.",
-    review_author: "DTF",
-    store_links: { steam: "https://store.steampowered.com/app/2379780/Balatro/" }
-  },
-  {
-    title: "Vampire Survivors",
-    description_short: "Минималистичный экшен, запустивший тренд на автоатакующие bullet-hell игры.",
-    genres: ["Roguelite", "Bullet Heaven", "Casual"],
-    platforms: ["PC", "Mobile", "Nintendo Switch"],
-    release_year: 2021,
-    rating: 8,
-    review_text: "Одна из лучших игр за свои деньги. Бесконечный цикл 'ещё минуту'.",
-    review_author: "PlayGround.ru",
-    store_links: { steam: "https://store.steampowered.com/app/1794680/Vampire_Survivors/" }
-  },
-  {
-    title: "Enter the Gungeon",
-    description_short: "Сложный и весёлый пулевой ад с сотнями видов безумного оружия.",
-    genres: ["Roguelike", "Bullet Hell", "Action"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2016,
-    rating: 9,
-    review_text: "Оружие стреляет пчелами? Да. Акулами? Да. Это хаос и восторг.",
-    review_author: "Riot Pixels",
-    store_links: { steam: "https://store.steampowered.com/app/311690/Enter_the_Gungeon/" }
-  },
-  {
-    title: "Risk of Rain 2",
-    description_short: "Трёхмерный кооперативный рогалик с безумным масштабированием сложности.",
-    genres: ["Roguelite", "Third-Person Shooter", "Co-op"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2020,
-    rating: 9,
-    review_text: "Чем дольше играешь, тем безумнее становятся способности. Лучший кооператив.",
-    review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/632360/Risk_of_Rain_2/" }
-  },
-  {
-    title: "Loop Hero",
-    description_short: "Необычная тактическая стратегия, где вы строите окружение вокруг героя.",
-    genres: ["Strategy", "Roguelike", "Idle"],
-    platforms: ["PC", "Nintendo Switch"],
-    release_year: 2021,
-    rating: 8,
-    review_text: "Гениальная механика: вы не управляете героем, а создаёте мир, в котором он сражается.",
-    review_author: "Kanobu.ru",
-    store_links: { steam: "https://store.steampowered.com/app/1282730/Loop_Hero/" }
-  },
-  {
-    title: "Ori and the Blind Forest",
-    description_short: "Потрясающе красивая сказка с отзывчивым управлением.",
-    genres: ["Metroidvania", "Platformer", "Emotional"],
-    platforms: ["PC", "Xbox", "Nintendo Switch"],
-    release_year: 2015,
-    rating: 9,
-    review_text: "Одна из самых красивых игр на свете. Отличный геймплей и душераздирающая история.",
-    review_author: "IGN",
-    store_links: { steam: "https://store.steampowered.com/app/261570/Ori_and_the_Blind_Forest/" }
-  },
-  {
-    title: "Cuphead",
-    description_short: "Босс-раш в стиле американской анимации 1930-х годов с зубодробительной сложностью.",
-    genres: ["Action", "Platformer", "Run and Gun"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2017,
-    rating: 9,
-    review_text: "Уникальный визуальный стиль и музыка джаза. Сложность старых игр.",
-    review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/268910/Cuphead/" }
-  },
-  {
-    title: "Blasphemous",
-    description_short: "Жестокая пиксельная метроидвания, пропитанная религиозной готикой.",
-    genres: ["Metroidvania", "Action", "Dark Fantasy"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2019,
-    rating: 8,
-    review_text: "Гнетущая атмосфера, брутальные бои и странная лор. Очень атмосферно.",
-    review_author: "Riot Pixels",
-    store_links: { steam: "https://store.steampowered.com/app/774361/Blasphemous/" }
-  },
-  {
-    title: "Katana Zero",
-    description_short: "Стильный неонуарный экшен-платформер с манипуляцией временем.",
-    genres: ["Action", "Platformer", "Neo-noir"],
-    platforms: ["PC", "Nintendo Switch"],
-    release_year: 2019,
-    rating: 8,
-    review_text: "Лихое замедление времени, синтвейв и сюжет-головоломка.",
-    review_author: "DTF",
-    store_links: { steam: "https://store.steampowered.com/app/460950/Katana_Zero/" }
-  },
-  {
-    title: "Undertale",
-    description_short: "Культовая ролевая игра, которую можно пройти без единого убийства.",
-    genres: ["RPG", "Narrative-Driven", "Comedy"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2015,
-    rating: 10,
-    review_text: "Игра, которая помнит всё. Юмор, слом четвёртой стены и невероятный финал.",
-    review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/391540/Undertale/" }
-  },
-  {
-    title: "What Remains of Edith Finch",
-    description_short: "Эталонный «симулятор ходьбы» о проклятии одной семьи.",
-    genres: ["Walking Simulator", "Narrative", "Mystery"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2017,
-    rating: 9,
-    review_text: "Короткий, но очень сильный опыт. Одна из лучших игр-прогулок.",
-    review_author: "IGN",
-    store_links: { steam: "https://store.steampowered.com/app/501300/What_Remains_of_Edith_Finch/" }
-  },
-  {
-    title: "Firewatch",
-    description_short: "Живописная история смотрителя пожарной вышки в лесах Вайоминга.",
-    genres: ["Walking Simulator", "Adventure", "Mystery"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2016,
-    rating: 8,
-    review_text: "Красота природы и радиопереговоры. Атмосфера уединения и лёгкой тревоги.",
-    review_author: "Kanobu.ru",
-    store_links: { steam: "https://store.steampowered.com/app/383870/Firewatch/" }
-  },
-  {
-    title: "Stray",
-    description_short: "Атмосферное приключение бродячего кота в киберпанковом городе роботов.",
-    genres: ["Adventure", "Platformer", "Cyberpunk"],
-    platforms: ["PC", "PlayStation", "Xbox"],
-    release_year: 2022,
-    rating: 8,
-    review_text: "Вы кот. Что ещё нужно? Атмосфера, головоломки и милота.",
-    review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/1332010/Stray/" }
-  },
-  {
-    title: "Stardew Valley",
-    description_short: "Уютный симулятор фермы, созданный одним человеком и покоривший миллионы.",
-    genres: ["Simulation", "Farming", "RPG"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch", "Mobile"],
-    release_year: 2016,
-    rating: 10,
-    review_text: "Бесконечное удовольствие от выращивания репы, рыбалки и общения с жителями.",
-    review_author: "IGN",
-    store_links: { steam: "https://store.steampowered.com/app/413150/Stardew_Valley/" }
-  },
-  {
-    title: "RimWorld",
-    description_short: "Глубокий симулятор колонии под управлением продвинутого ИИ-рассказчика.",
-    genres: ["Simulation", "Strategy", "Colony Management"],
-    platforms: ["PC"],
-    release_year: 2018,
-    rating: 9,
-    review_text: "Каждый раз уникальная драма. История ваших поселенцев пишется сама.",
-    review_author: "Riot Pixels",
-    store_links: { steam: "https://store.steampowered.com/app/294100/RimWorld/" }
-  },
-  {
-    title: "Don't Starve",
-    description_short: "Стильное готическое выживание в причудливом опасном мире.",
-    genres: ["Survival", "Roguelike", "Crafting"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch", "Mobile"],
-    release_year: 2013,
-    rating: 8,
-    review_text: "Безумный художник-наутилус, голод и тьма. Сложно, но увлекательно.",
-    review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/219740/Dont_Starve/" }
-  },
-  {
-    title: "Baba Is You",
-    description_short: "Головоломка, в которой вы меняете правила игры, двигая слова-блоки.",
-    genres: ["Puzzle", "Logic", "Creative"],
-    platforms: ["PC", "Nintendo Switch", "Mobile"],
-    release_year: 2019,
-    rating: 9,
-    review_text: "Вы ещё не думали так далеко. Гениальная механика, взрывающая мозг.",
-    review_author: "DTF",
-    store_links: { steam: "https://store.steampowered.com/app/736260/Baba_Is_You/" }
-  },
-  {
-    title: "Papers, Please",
-    description_short: "Симулятор инспектора миграционной службы тоталитарного государства.",
-    genres: ["Puzzle", "Simulation", "Dystopian"],
-    platforms: ["PC", "Mobile", "PlayStation"],
-    release_year: 2013,
-    rating: 9,
-    review_text: "Моральный выбор, бюрократия и серая мораль. Глубоко и мрачно.",
-    review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/239030/Papers_Please/" }
-  },
-  {
-    title: "Deep Rock Galactic",
-    description_short: "Кооперативный шутер про гномов-шахтёров в космосе.",
-    genres: ["FPS", "Co-op", "Mining"],
-    platforms: ["PC", "PlayStation", "Xbox"],
-    release_year: 2020,
-    rating: 9,
-    review_text: "Лучший кооператив со времён Left 4 Dead. Скала и камень, брат!",
-    review_author: "IGN",
-    store_links: { steam: "https://store.steampowered.com/app/548430/Deep_Rock_Galactic/" }
-  },
-  {
-    title: "Signalis",
-    description_short: "Атмосферный survival horror старой школы в духе классических Resident Evil.",
-    genres: ["Survival Horror", "Puzzle", "Sci-Fi"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2022,
-    rating: 8,
-    review_text: "Пиксели, головоломки и гнетущая атмосфера. Дань уважения жанру.",
-    review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/1262350/Signalis/" }
-  },
-  {
-    title: "Gris",
-    description_short: "Трогательное акварельное приключение, метафорически исследующее стадии скорби.",
-    genres: ["Platformer", "Art", "Emotional"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch", "Mobile"],
-    release_year: 2018,
-    rating: 9,
-    review_text: "Игра-картина. Без слов рассказывает историю боли и принятия.",
-    review_author: "IGN",
-    store_links: { steam: "https://store.steampowered.com/app/683320/GRIS/" }
-  },
-  {
-    title: "A Short Hike",
-    description_short: "Маленькое, доброе приключение о прогулке по национальному парку без телефона.",
-    genres: ["Adventure", "Casual", "Exploration"],
-    platforms: ["PC", "Nintendo Switch"],
-    release_year: 2019,
-    rating: 8,
-    review_text: "Чистое, уютное счастье. Поднимает настроение лучше любой терапии.",
-    review_author: "DTF",
-    store_links: { steam: "https://store.steampowered.com/app/1055540/A_Short_Hike/" }
-  },
- // === ДОПОЛНИТЕЛЬНЫЕ ИГРЫ (уникальные) ===
-  {
-    title: "Darkest Dungeon",
-    description_short: "Мрачная тактика о психологических травмах и выживании в подземельях.",
-    genres: ["Roguelike", "Strategy", "Gothic", "Turn-based"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch", "Mobile"],
-    release_year: 2016,
-    rating: 9,
-    review_text: "Безумие, стресс и отчаяние. Очень сложный, но затягивающий тактический рогалик.",
-    review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/262060/Darkest_Dungeon/" }
-  },
-  {
-    title: "Darkest Dungeon II",
-    description_short: "Дорожное приключение в умирающем мире с изменённой структурой.",
-    genres: ["Roguelike", "Strategy", "Gothic", "Turn-based"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2023,
-    rating: 8,
-    review_text: "Вместо поместья — путь на дилижансе. Мрачнее, но спорные изменения.",
-    review_author: "IGN",
-    store_links: { steam: "https://store.steampowered.com/app/1940340/Darkest_Dungeon_II/" }
-  },
-  {
-    title: "Spelunky 2",
-    description_short: "Хардкорный платформер-рогалик, требующий идеальной точности.",
-    genres: ["Roguelike", "Platformer", "Exploration"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2020,
-    rating: 9,
-    review_text: "Сложность первого уровня — цветочки. Куча секретов и смертей.",
-    review_author: "Riot Pixels",
-    store_links: { steam: "https://store.steampowered.com/app/418530/Spelunky_2/" }
-  },
-  {
-    title: "Crypt of the NecroDancer",
-    description_short: "Уникальный ритм-рогалик, где двигаться нужно в такт музыке.",
-    genres: ["Roguelike", "Rhythm", "Dungeon Crawler"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch", "Mobile"],
-    release_year: 2015,
-    rating: 8,
-    review_text: "Гениальное смешение жанров. Прыгай под бит и руби скелетов.",
-    review_author: "DTF",
-    store_links: { steam: "https://store.steampowered.com/app/247080/Crypt_of_the_NecroDancer/" }
-  },
-  {
-    title: "Buckshot Roulette",
-    description_short: "Напряжённая короткая игра в аналог русской рулетки с дробовиком.",
-    genres: ["Horror", "Psychological", "Simulation"],
-    platforms: ["PC"],
-    release_year: 2023,
-    rating: 8,
-    review_text: "Коротко, жутко, атмосферно. Усы, дробовик и дьявол.",
-    review_author: "DTF",
-    store_links: { steam: "https://store.steampowered.com/app/2835570/Buckshot_Roulette/" }
-  },
-  {
-    title: "Ravenswatch",
-    description_short: "Кооперативный изометрический экшен по мотивам мрачных сказок.",
-    genres: ["Roguelite", "Action", "Co-op"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2023,
-    rating: 7,
-    review_text: "Красивый арт, но пока сыровато. Интересные герои и способности.",
-    review_author: "Kanobu.ru",
-    store_links: { steam: "https://store.steampowered.com/app/2071280/Ravenswatch/" }
-  },
-  {
-    title: "FTL: Faster Than Light",
-    description_short: "Симулятор капитана космического корабля в жанре roguelike.",
-    genres: ["Strategy", "Roguelike", "Sci-Fi", "Management"],
-    platforms: ["PC", "iOS"],
-    release_year: 2012,
-    rating: 9,
-    review_text: "Космос, перегрузка систем и перманентная смерть. Классика.",
-    review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/212680/FTL_Faster_Than_Light/" }
-  },
-  {
-    title: "Into the Breach",
-    description_short: "Пошаговая тактика от авторов FTL, напоминающая шахматы с мехами и жуками.",
-    genres: ["Strategy", "Turn-based", "Roguelike", "Sci-Fi"],
-    platforms: ["PC", "Nintendo Switch", "Mobile"],
-    release_year: 2018,
-    rating: 9,
-    review_text: "Идеальная тактика: каждый ход важен, предсказуемость врагов, множество отрядов.",
-    review_author: "IGN",
-    store_links: { steam: "https://store.steampowered.com/app/590380/Into_the_Breach/" }
-  },
-  {
-    title: "Super Meat Boy",
-    description_short: "Легендарный мясной платформер, возродивший моду на высокую сложность.",
-    genres: ["Platformer", "Precision", "Action"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2010,
-    rating: 9,
-    review_text: "Тысячи смертей, секундные уровни и гениальный дизайн.",
-    review_author: "Riot Pixels",
-    store_links: { steam: "https://store.steampowered.com/app/40800/Super_Meat_Boy/" }
-  },
-  {
-    title: "Limbo",
-    description_short: "Мрачный и минималистичный пазл-платформер от студии Playdead.",
-    genres: ["Puzzle", "Platformer", "Dark"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch", "Mobile"],
-    release_year: 2010,
-    rating: 8,
-    review_text: "Чёрно-белая атмосфера, жуткие пауки и гениальные загадки.",
-    review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/48000/Limbo/" }
-  },
-  {
-    title: "Inside",
-    description_short: "Идейный сиквел Limbo с гнетущей атмосферой антиутопии.",
-    genres: ["Puzzle", "Platformer", "Dark"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2016,
-    rating: 9,
-    review_text: "Мрачно, загадочно, идеально. Каждая минута — напряжение.",
-    review_author: "IGN",
-    store_links: { steam: "https://store.steampowered.com/app/304430/Inside/" }
-  },
-  {
-    title: "Fez",
-    description_short: "Пространственная головоломка, завязанная на переключении 2D и 3D перспектив.",
-    genres: ["Puzzle", "Platformer", "Exploration"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2013,
-    rating: 8,
-    review_text: "Ошеломляющий дизайн уровней. Вращай мир и ищи секреты.",
-    review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/224760/Fez/" }
-  },
-  {
-    title: "Shovel Knight: Treasure Trove",
-    description_short: "Лучшее любовное послание классическим 8-битным платформерам.",
-    genres: ["Platformer", "Action", "Retro"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2014,
-    rating: 9,
-    review_text: "Ностальгия с современным управлением. Множество кампаний, отличный саундтрек.",
-    review_author: "Riot Pixels",
-    store_links: { steam: "https://store.steampowered.com/app/250760/Shovel_Knight_Treasure_Trove/" }
-  },
-  {
-    title: "The Messenger",
-    description_short: "Платформер, изящно эволюционирующий из 8-битного в 16-битный мир.",
-    genres: ["Platformer", "Metroidvania", "Retro"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2018,
-    rating: 8,
-    review_text: "Сначала линейный платформер, потом метроидвания. Остроумно и сложно.",
-    review_author: "Kanobu.ru",
-    store_links: { steam: "https://store.steampowered.com/app/764790/The_Messenger/" }
-  },
-  {
-    title: "Rain World",
-    description_short: "Симулятор выживания милого слизнекота в экосистеме жестокого мира.",
-    genres: ["Platformer", "Survival", "Metroidvania"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2017,
-    rating: 8,
-    review_text: "Мир живёт своей жизнью. Неистово сложно, но невероятно атмосферно.",
-    review_author: "DTF",
-    store_links: { steam: "https://store.steampowered.com/app/312520/Rain_World/" }
-  },
-  {
-    title: "To the Moon",
-    description_short: "Трогательная интерактивная история о последнем желании умирающего человека.",
-    genres: ["RPG", "Narrative", "Emotional"],
-    platforms: ["PC", "Mobile", "Nintendo Switch"],
-    release_year: 2011,
-    rating: 9,
-    review_text: "Не игра, а эмоция. Рассказывает историю, способную разрыдаться.",
-    review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/206440/To_the_Moon/" }
-  },
-  {
-    title: "Omori",
-    description_short: "Психологический хоррор и RPG о борьбе с депрессией и чувством вины.",
-    genres: ["RPG", "Psychological Horror", "Narrative"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2020,
-    rating: 9,
-    review_text: "Душераздирающая история, прекрасный визуал и незабываемый саундтрек.",
-    review_author: "IGN",
-    store_links: { steam: "https://store.steampowered.com/app/1150690/OMORI/" }
-  },
-  {
-    title: "Slay the Princess",
-    description_short: "Текстовый хоррор-квест с множеством выборов и отличным юмором.",
-    genres: ["Visual Novel", "Horror", "Choice-based"],
-    platforms: ["PC", "Nintendo Switch"],
-    release_year: 2023,
-    rating: 8,
-    review_text: "Десятки концовок, голоса, и принцесса, которую нельзя убить.",
-    review_author: "DTF",
-    store_links: { steam: "https://store.steampowered.com/app/1989270/Slay_the_Princess/" }
-  },
-  {
-    title: "Kentucky Route Zero",
-    description_short: "Сюрреалистическое роуд-муви по скрытым дорогам Америки.",
-    genres: ["Adventure", "Point-and-Click", "Surreal"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2020,
-    rating: 8,
-    review_text: "Магический реализм, поэзия и нестандартное повествование.",
-    review_author: "Riot Pixels",
-    store_links: { steam: "https://store.steampowered.com/app/231200/Kentucky_Route_Zero/" }
-  },
-  {
-    title: "Night in the Woods",
-    description_short: "Меланхоличная история о взрослении, возвращении домой и котиках.",
-    genres: ["Adventure", "Narrative", "Exploration"],
-    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
-    release_year: 2017,
-    rating: 8,
-    review_text: "Диалоги, музыка, атмосфера маленького городка. Тёплая грусть.",
-    review_author: "DTF",
-    store_links: { steam: "https://store.steampowered.com/app/481510/Night_in_the_Woods/" }
-  },
-  {
+
+  const games = [
+
+  {
+    title: "Outer Wilds",
+    description_short: "Космическое приключение с исследованием и временными петлями.",
+    genres: ["Adventure", "Exploration", "Mystery", "Time Loop"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2019,
+    rating: 10,
+    review_text: "Шедевр, который можно пройти только один раз.",
+    review_author: "Skill Up",
+    store_links: { steam: "https://store.steampowered.com/app/753640/Outer_Wilds/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/753640/header.jpg"
+  },
+  {
+    title: "Hollow Knight",
+    description_short: "Атмосферный метроидвания-платформер.",
+    genres: ["Metroidvania", "Action", "Platformer", "Dark Fantasy"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2017,
+    rating: 9,
+    review_text: "Один из лучших метроидваний за последние годы.",
+    review_author: "Skill Up",
+    store_links: { steam: "https://store.steampowered.com/app/367520/Hollow_Knight/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/header.jpg"
+  },
+  {
+    title: "Disco Elysium - The Final Cut",
+    description_short: "Глубокая RPG без боёв.",
+    genres: ["RPG", "Detective", "Narrative-Driven", "Philosophical"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2019,
+    rating: 10,
+    review_text: "Текстовая RPG, после которой другие игры кажутся пустыми.",
+    review_author: "Skill Up",
+    store_links: { steam: "https://store.steampowered.com/app/632470/Disco_Elysium__The_Final_Cut/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/632470/header.jpg"
+  },
+  {
+    title: "Inscryption",
+    description_short: "Карточная игра с элементами хоррора.",
+    genres: ["Card Game", "Roguelike", "Horror", "Puzzle"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2021,
+    rating: 9,
+    review_text: "Не просто карточная игра, а мета-хоррор.",
+    review_author: "Skill Up",
+    store_links: { steam: "https://store.steampowered.com/app/1092790/Inscryption/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1092790/header.jpg"
+  },
+  {
+    title: "Cult of the Lamb",
+    description_short: "Экшен-рогалик про управление культом.",
+    genres: ["Roguelite", "Action", "Base Building", "Simulation"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2022,
+    rating: 8,
+    review_text: "Смесь Animal Crossing и мрачного культа.",
+    review_author: "Skill Up",
+    store_links: { steam: "https://store.steampowered.com/app/1313140/Cult_of_the_Lamb/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1313140/header.jpg"
+  },
+  {
+    title: "Animal Well",
+    description_short: "Стильный пиксельный платформер-головоломка.",
+    genres: ["Puzzle", "Platformer", "Exploration", "Pixel Art"],
+    platforms: ["PC", "PlayStation", "Nintendo Switch"],
+    release_year: 2024,
+    rating: 9,
+    review_text: "Одна из самых умных головоломок.",
+    review_author: "Skill Up",
+    store_links: { steam: "https://store.steampowered.com/app/813230/ANIMAL_WELL/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/813230/header.jpg"
+  },
+  {
+    title: "Nine Sols",
+    description_short: "Экшен в стиле «тао-панк».",
+    genres: ["Action", "Metroidvania", "Parry-based Combat"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2024,
+    rating: 9,
+    review_text: "Если любите парировать — это ваш кандидат.",
+    review_author: "Skill Up",
+    store_links: { steam: "https://store.steampowered.com/app/1809540/Nine_Sols/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1809540/header.jpg"
+  },
+  {
+    title: "Dome Keeper",
+    description_short: "Шахтерский рогалик.",
+    genres: ["Roguelite", "Mining", "Tower Defense"],
+    platforms: ["PC", "Nintendo Switch", "Mobile"],
+    release_year: 2022,
+    rating: 8,
+    review_text: "Идеальная 'ещё одна партия' игра.",
+    review_author: "Skill Up",
+    store_links: { steam: "https://store.steampowered.com/app/1637320/Dome_Keeper/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1637320/header.jpg"
+  },
+  {
+    title: "The Case of the Golden Idol",
+    description_short: "Детектив в духе Return of the Obra Dinn.",
+    genres: ["Detective", "Puzzle", "Point-and-Click"],
+    platforms: ["PC", "Nintendo Switch", "Mobile"],
+    release_year: 2022,
+    rating: 9,
+    review_text: "Лучший детектив со времен Obra Dinn.",
+    review_author: "Skill Up",
+    store_links: { steam: "https://store.steampowered.com/app/1677770/The_Case_of_the_Golden_Idol/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1677770/header.jpg"
+  },
+  {
+    title: "Deadlink",
+    description_short: "Быстрый киберпанк-шутер.",
+    genres: ["FPS", "Roguelite", "Cyberpunk"],
+    platforms: ["PC", "PlayStation", "Xbox"],
+    release_year: 2023,
+    rating: 8,
+    review_text: "DOOM в киберпанке.",
+    review_author: "Skill Up",
+    store_links: { steam: "https://store.steampowered.com/app/1676130/Deadlink/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1676130/header.jpg"
+  },
+  // === Новые игры (без дублей) ===
+  {
+    title: "Hades",
+    description_short: "Эталонный экшен-рогалик о побеге из подземного царства с великолепным сюжетом.",
+    genres: ["Roguelite", "Action", "Mythology"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2020,
+    rating: 10,
+    review_text: "Бесконечная реиграбельность, стильный арт и захватывающая история. Одна из лучших инди-игр десятилетия.",
+    review_author: "DTF",
+    store_links: { steam: "https://store.steampowered.com/app/1145360/Hades/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1145360/header.jpg"
+  },
+  {
+    title: "Slay the Spire",
+    description_short: "Родоначальник жанра карточных колодостроительных приключений.",
+    genres: ["Card Game", "Roguelike", "Strategy"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch", "Mobile"],
+    release_year: 2019,
+    rating: 9,
+    review_text: "Идеальный баланс случайности и планирования. Каждая партия уникальна.",
+    review_author: "DTF",
+    store_links: { steam: "https://store.steampowered.com/app/646570/Slay_the_Spire/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/646570/header.jpg"
+  },
+  {
+    title: "Celeste",
+    description_short: "Хардкорный платформер о преодолении внутренних трудностей и подъёме на гору.",
+    genres: ["Platformer", "Precision", "Narrative"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2018,
+    rating: 10,
+    review_text: "Точнейшее управление, душевная история и музыка. Шедевр жанра.",
+    review_author: "DTF",
+    store_links: { steam: "https://store.steampowered.com/app/504230/Celeste/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/504230/header.jpg"
+  },
+  {
+    title: "Subnautica",
+    description_short: "Заразительное и местами пугающее выживание в глубинах океана чужой планеты.",
+    genres: ["Survival", "Exploration", "Underwater", "Horror"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2018,
+    rating: 9,
+    review_text: "Невероятная атмосфера одиночества и страх глубин. Один из лучших симуляторов выживания.",
+    review_author: "Reddit",
+    store_links: { steam: "https://store.steampowered.com/app/264710/Subnautica/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/264710/header.jpg"
+  },
+  {
+    title: "Return of the Obra Dinn",
+    description_short: "Уникальный монохромный детектив по расследованию смертей на корабле.",
+    genres: ["Puzzle", "Detective", "Mystery"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2018,
+    rating: 9,
+    review_text: "Гениальная механика восстановления событий, стиль 1-bit и потрясающая логика.",
+    review_author: "DTF",
+    store_links: { steam: "https://store.steampowered.com/app/653530/Return_of_the_Obra_Dinn/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/653530/header.jpg"
+  },
+  {
+    title: "Hotline Miami",
+    description_short: "Ураганный пиксельный экшен с безумным саундтреком и ультранасилием.",
+    genres: ["Action", "Top-Down Shooter", "Fast-Paced"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch", "Mobile"],
+    release_year: 2012,
+    rating: 9,
+    review_text: "Каждый уровень — как забег на адреналине. Саундтрек и геймплей — идеальное безумие.",
+    review_author: "Reddit",
+    store_links: { steam: "https://store.steampowered.com/app/219150/Hotline_Miami/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/219150/header.jpg"
+  },
+  {
+    title: "Journey",
+    description_short: "Бессловесное и невероятно красивое путешествие к далекой горе.",
+    genres: ["Adventure", "Art", "Meditative"],
+    platforms: ["PC", "PlayStation", "iOS"],
+    release_year: 2012,
+    rating: 10,
+    review_text: "Игра, которую нужно прочувствовать. Музыка и визуал — высочайший уровень.",
+    review_author: "Reddit",
+    store_links: { steam: "https://store.steampowered.com/app/638230/Journey/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/638230/header.jpg"
+  },
+  // === Дополнительные (каждая только раз) ===
+  {
+    title: "The Binding of Isaac: Rebirth",
+    description_short: "Мрачный и бесконечно реиграбельный прародитель современных рогаликов.",
+    genres: ["Roguelike", "Action", "Dark Fantasy"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2014,
+    rating: 9,
+    review_text: "Тысячи предметов, библейский сюрреализм и невероятная глубина. Классика.",
+    review_author: "StopGame.ru",
+    store_links: { steam: "https://store.steampowered.com/app/250900/The_Binding_of_Isaac_Rebirth/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/250900/header.jpg"
+  },
+  {
+    title: "Dead Cells",
+    description_short: "Динамичный гибрид рогалика и метроидвании с упором на боевую систему.",
+    genres: ["Roguelite", "Metroidvania", "Action"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2018,
+    rating: 9,
+    review_text: "Идеальный темп, отзывчивое управление и море разблокируемого оружия.",
+    review_author: "IGN",
+    store_links: { steam: "https://store.steampowered.com/app/588650/Dead_Cells/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/588650/header.jpg"
+  },
+  {
+    title: "Balatro",
+    description_short: "Безумно затягивающий покерный психоделический рогалик.",
+    genres: ["Card Game", "Roguelike", "Puzzle"],
+    platforms: ["PC", "Nintendo Switch"],
+    release_year: 2024,
+    rating: 9,
+    review_text: "Каждый забег уникален, числа растут, дофамин зашкаливает.",
+    review_author: "DTF",
+    store_links: { steam: "https://store.steampowered.com/app/2379780/Balatro/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2379780/header.jpg"
+  },
+  {
+    title: "Vampire Survivors",
+    description_short: "Минималистичный экшен, запустивший тренд на автоатакующие bullet-hell игры.",
+    genres: ["Roguelite", "Bullet Heaven", "Casual"],
+    platforms: ["PC", "Mobile", "Nintendo Switch"],
+    release_year: 2021,
+    rating: 8,
+    review_text: "Одна из лучших игр за свои деньги. Бесконечный цикл 'ещё минуту'.",
+    review_author: "PlayGround.ru",
+    store_links: { steam: "https://store.steampowered.com/app/1794680/Vampire_Survivors/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1794680/header.jpg"
+  },
+  {
+    title: "Enter the Gungeon",
+    description_short: "Сложный и весёлый пулевой ад с сотнями видов безумного оружия.",
+    genres: ["Roguelike", "Bullet Hell", "Action"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2016,
+    rating: 9,
+    review_text: "Оружие стреляет пчелами? Да. Акулами? Да. Это хаос и восторг.",
+    review_author: "Riot Pixels",
+    store_links: { steam: "https://store.steampowered.com/app/311690/Enter_the_Gungeon/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/311690/header.jpg"
+  },
+  {
+    title: "Risk of Rain 2",
+    description_short: "Трёхмерный кооперативный рогалик с безумным масштабированием сложности.",
+    genres: ["Roguelite", "Third-Person Shooter", "Co-op"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2020,
+    rating: 9,
+    review_text: "Чем дольше играешь, тем безумнее становятся способности. Лучший кооператив.",
+    review_author: "StopGame.ru",
+    store_links: { steam: "https://store.steampowered.com/app/632360/Risk_of_Rain_2/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/632360/header.jpg"
+  },
+  {
+    title: "Loop Hero",
+    description_short: "Необычная тактическая стратегия, где вы строите окружение вокруг героя.",
+    genres: ["Strategy", "Roguelike", "Idle"],
+    platforms: ["PC", "Nintendo Switch"],
+    release_year: 2021,
+    rating: 8,
+    review_text: "Гениальная механика: вы не управляете героем, а создаёте мир, в котором он сражается.",
+    review_author: "Kanobu.ru",
+    store_links: { steam: "https://store.steampowered.com/app/1282730/Loop_Hero/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1282730/header.jpg"
+  },
+  {
+    title: "Ori and the Blind Forest",
+    description_short: "Потрясающе красивая сказка с отзывчивым управлением.",
+    genres: ["Metroidvania", "Platformer", "Emotional"],
+    platforms: ["PC", "Xbox", "Nintendo Switch"],
+    release_year: 2015,
+    rating: 9,
+    review_text: "Одна из самых красивых игр на свете. Отличный геймплей и душераздирающая история.",
+    review_author: "IGN",
+    store_links: { steam: "https://store.steampowered.com/app/261570/Ori_and_the_Blind_Forest/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/261570/header.jpg"
+  },
+  {
+    title: "Cuphead",
+    description_short: "Босс-раш в стиле американской анимации 1930-х годов с зубодробительной сложностью.",
+    genres: ["Action", "Platformer", "Run and Gun"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2017,
+    rating: 9,
+    review_text: "Уникальный визуальный стиль и музыка джаза. Сложность старых игр.",
+    review_author: "StopGame.ru",
+    store_links: { steam: "https://store.steampowered.com/app/268910/Cuphead/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/268910/header.jpg"
+  },
+  {
+    title: "Blasphemous",
+    description_short: "Жестокая пиксельная метроидвания, пропитанная религиозной готикой.",
+    genres: ["Metroidvania", "Action", "Dark Fantasy"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2019,
+    rating: 8,
+    review_text: "Гнетущая атмосфера, брутальные бои и странная лор. Очень атмосферно.",
+    review_author: "Riot Pixels",
+    store_links: { steam: "https://store.steampowered.com/app/774361/Blasphemous/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/774361/header.jpg"
+  },
+  {
+    title: "Katana Zero",
+    description_short: "Стильный неонуарный экшен-платформер с манипуляцией временем.",
+    genres: ["Action", "Platformer", "Neo-noir"],
+    platforms: ["PC", "Nintendo Switch"],
+    release_year: 2019,
+    rating: 8,
+    review_text: "Лихое замедление времени, синтвейв и сюжет-головоломка.",
+    review_author: "DTF",
+    store_links: { steam: "https://store.steampowered.com/app/460950/Katana_Zero/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/460950/header.jpg"
+  },
+  {
+    title: "Undertale",
+    description_short: "Культовая ролевая игра, которую можно пройти без единого убийства.",
+    genres: ["RPG", "Narrative-Driven", "Comedy"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2015,
+    rating: 10,
+    review_text: "Игра, которая помнит всё. Юмор, слом четвёртой стены и невероятный финал.",
+    review_author: "StopGame.ru",
+    store_links: { steam: "https://store.steampowered.com/app/391540/Undertale/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/391540/header.jpg"
+  },
+  {
+    title: "What Remains of Edith Finch",
+    description_short: "Эталонный «симулятор ходьбы» о проклятии одной семьи.",
+    genres: ["Walking Simulator", "Narrative", "Mystery"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2017,
+    rating: 9,
+    review_text: "Короткий, но очень сильный опыт. Одна из лучших игр-прогулок.",
+    review_author: "IGN",
+    store_links: { steam: "https://store.steampowered.com/app/501300/What_Remains_of_Edith_Finch/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/501300/header.jpg"
+  },
+  {
+    title: "Firewatch",
+    description_short: "Живописная история смотрителя пожарной вышки в лесах Вайоминга.",
+    genres: ["Walking Simulator", "Adventure", "Mystery"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2016,
+    rating: 8,
+    review_text: "Красота природы и радиопереговоры. Атмосфера уединения и лёгкой тревоги.",
+    review_author: "Kanobu.ru",
+    store_links: { steam: "https://store.steampowered.com/app/383870/Firewatch/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/383870/header.jpg"
+  },
+  {
+    title: "Stray",
+    description_short: "Атмосферное приключение бродячего кота в киберпанковом городе роботов.",
+    genres: ["Adventure", "Platformer", "Cyberpunk"],
+    platforms: ["PC", "PlayStation", "Xbox"],
+    release_year: 2022,
+    rating: 8,
+    review_text: "Вы кот. Что ещё нужно? Атмосфера, головоломки и милота.",
+    review_author: "StopGame.ru",
+    store_links: { steam: "https://store.steampowered.com/app/1332010/Stray/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1332010/header.jpg"
+  },
+  {
+    title: "Stardew Valley",
+    description_short: "Уютный симулятор фермы, созданный одним человеком и покоривший миллионы.",
+    genres: ["Simulation", "Farming", "RPG"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch", "Mobile"],
+    release_year: 2016,
+    rating: 10,
+    review_text: "Бесконечное удовольствие от выращивания репы, рыбалки и общения с жителями.",
+    review_author: "IGN",
+    store_links: { steam: "https://store.steampowered.com/app/413150/Stardew_Valley/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/413150/header.jpg"
+  },
+  {
+    title: "RimWorld",
+    description_short: "Глубокий симулятор колонии под управлением продвинутого ИИ-рассказчика.",
+    genres: ["Simulation", "Strategy", "Colony Management"],
+    platforms: ["PC"],
+    release_year: 2018,
+    rating: 9,
+    review_text: "Каждый раз уникальная драма. История ваших поселенцев пишется сама.",
+    review_author: "Riot Pixels",
+    store_links: { steam: "https://store.steampowered.com/app/294100/RimWorld/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/294100/header.jpg"
+  },
+  {
+    title: "Don't Starve",
+    description_short: "Стильное готическое выживание в причудливом опасном мире.",
+    genres: ["Survival", "Roguelike", "Crafting"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch", "Mobile"],
+    release_year: 2013,
+    rating: 8,
+    review_text: "Безумный художник-наутилус, голод и тьма. Сложно, но увлекательно.",
+    review_author: "StopGame.ru",
+    store_links: { steam: "https://store.steampowered.com/app/219740/Dont_Starve/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/219740/header.jpg"
+  },
+  {
+    title: "Baba Is You",
+    description_short: "Головоломка, в которой вы меняете правила игры, двигая слова-блоки.",
+    genres: ["Puzzle", "Logic", "Creative"],
+    platforms: ["PC", "Nintendo Switch", "Mobile"],
+    release_year: 2019,
+    rating: 9,
+    review_text: "Вы ещё не думали так далеко. Гениальная механика, взрывающая мозг.",
+    review_author: "DTF",
+    store_links: { steam: "https://store.steampowered.com/app/736260/Baba_Is_You/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/736260/header.jpg"
+  },
+  {
+    title: "Papers, Please",
+    description_short: "Симулятор инспектора миграционной службы тоталитарного государства.",
+    genres: ["Puzzle", "Simulation", "Dystopian"],
+    platforms: ["PC", "Mobile", "PlayStation"],
+    release_year: 2013,
+    rating: 9,
+    review_text: "Моральный выбор, бюрократия и серая мораль. Глубоко и мрачно.",
+    review_author: "StopGame.ru",
+    store_links: { steam: "https://store.steampowered.com/app/239030/Papers_Please/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/239030/header.jpg"
+  },
+  {
+    title: "Deep Rock Galactic",
+    description_short: "Кооперативный шутер про гномов-шахтёров в космосе.",
+    genres: ["FPS", "Co-op", "Mining"],
+    platforms: ["PC", "PlayStation", "Xbox"],
+    release_year: 2020,
+    rating: 9,
+    review_text: "Лучший кооператив со времён Left 4 Dead. Скала и камень, брат!",
+    review_author: "IGN",
+    store_links: { steam: "https://store.steampowered.com/app/548430/Deep_Rock_Galactic/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/548430/header.jpg"
+  },
+  {
+    title: "Signalis",
+    description_short: "Атмосферный survival horror старой школы в духе классических Resident Evil.",
+    genres: ["Survival Horror", "Puzzle", "Sci-Fi"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2022,
+    rating: 8,
+    review_text: "Пиксели, головоломки и гнетущая атмосфера. Дань уважения жанру.",
+    review_author: "StopGame.ru",
+    store_links: { steam: "https://store.steampowered.com/app/1262350/Signalis/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1262350/header.jpg"
+  },
+  {
+    title: "Gris",
+    description_short: "Трогательное акварельное приключение, метафорически исследующее стадии скорби.",
+    genres: ["Platformer", "Art", "Emotional"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch", "Mobile"],
+    release_year: 2018,
+    rating: 9,
+    review_text: "Игра-картина. Без слов рассказывает историю боли и принятия.",
+    review_author: "IGN",
+    store_links: { steam: "https://store.steampowered.com/app/683320/GRIS/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/683320/header.jpg"
+  },
+  {
+    title: "A Short Hike",
+    description_short: "Маленькое, доброе приключение о прогулке по национальному парку без телефона.",
+    genres: ["Adventure", "Casual", "Exploration"],
+    platforms: ["PC", "Nintendo Switch"],
+    release_year: 2019,
+    rating: 8,
+    review_text: "Чистое, уютное счастье. Поднимает настроение лучше любой терапии.",
+    review_author: "DTF",
+    store_links: { steam: "https://store.steampowered.com/app/1055540/A_Short_Hike/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1055540/header.jpg"
+  },
+  {
+    title: "Darkest Dungeon",
+    description_short: "Мрачная тактика о психологических травмах и выживании в подземельях.",
+    genres: ["Roguelike", "Strategy", "Gothic", "Turn-based"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch", "Mobile"],
+    release_year: 2016,
+    rating: 9,
+    review_text: "Безумие, стресс и отчаяние. Очень сложный, но затягивающий тактический рогалик.",
+    review_author: "StopGame.ru",
+    store_links: { steam: "https://store.steampowered.com/app/262060/Darkest_Dungeon/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/262060/header.jpg"
+  },
+  {
+    title: "Spelunky 2",
+    description_short: "Хардкорный платформер-рогалик, требующий идеальной точности.",
+    genres: ["Roguelike", "Platformer", "Exploration"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2020,
+    rating: 9,
+    review_text: "Сложность первого уровня — цветочки. Куча секретов и смертей.",
+    review_author: "Riot Pixels",
+    store_links: { steam: "https://store.steampowered.com/app/418530/Spelunky_2/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/418530/header.jpg"
+  },
+  {
+    title: "Crypt of the NecroDancer",
+    description_short: "Уникальный ритм-рогалик, где двигаться нужно в такт музыке.",
+    genres: ["Roguelike", "Rhythm", "Dungeon Crawler"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch", "Mobile"],
+    release_year: 2015,
+    rating: 8,
+    review_text: "Гениальное смешение жанров. Прыгай под бит и руби скелетов.",
+    review_author: "DTF",
+    store_links: { steam: "https://store.steampowered.com/app/247080/Crypt_of_the_NecroDancer/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/247080/header.jpg"
+  },
+  {
+    title: "Buckshot Roulette",
+    description_short: "Напряжённая короткая игра в аналог русской рулетки с дробовиком.",
+    genres: ["Horror", "Psychological", "Simulation"],
+    platforms: ["PC"],
+    release_year: 2023,
+    rating: 8,
+    review_text: "Коротко, жутко, атмосферно. Усы, дробовик и дьявол.",
+    review_author: "DTF",
+    store_links: { steam: "https://store.steampowered.com/app/2835570/Buckshot_Roulette/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2835570/header.jpg"
+  },
+  {
+    title: "Ravenswatch",
+    description_short: "Кооперативный изометрический экшен по мотивам мрачных сказок.",
+    genres: ["Roguelite", "Action", "Co-op"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2023,
+    rating: 7,
+    review_text: "Красивый арт, но пока сыровато. Интересные герои и способности.",
+    review_author: "Kanobu.ru",
+    store_links: { steam: "https://store.steampowered.com/app/2071280/Ravenswatch/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2071280/header.jpg"
+  },
+  {
+    title: "FTL: Faster Than Light",
+    description_short: "Симулятор капитана космического корабля в жанре roguelike.",
+    genres: ["Strategy", "Roguelike", "Sci-Fi", "Management"],
+    platforms: ["PC", "iOS"],
+    release_year: 2012,
+    rating: 9,
+    review_text: "Космос, перегрузка систем и перманентная смерть. Классика.",
+    review_author: "StopGame.ru",
+    store_links: { steam: "https://store.steampowered.com/app/212680/FTL_Faster_Than_Light/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/212680/header.jpg"
+  },
+  {
+    title: "Into the Breach",
+    description_short: "Пошаговая тактика от авторов FTL, напоминающая шахматы с мехами и жуками.",
+    genres: ["Strategy", "Turn-based", "Roguelike", "Sci-Fi"],
+    platforms: ["PC", "Nintendo Switch", "Mobile"],
+    release_year: 2018,
+    rating: 9,
+    review_text: "Идеальная тактика: каждый ход важен, предсказуемость врагов, множество отрядов.",
+    review_author: "IGN",
+    store_links: { steam: "https://store.steampowered.com/app/590380/Into_the_Breach/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/590380/header.jpg"
+  },
+  {
+    title: "Super Meat Boy",
+    description_short: "Легендарный мясной платформер, возродивший моду на высокую сложность.",
+    genres: ["Platformer", "Precision", "Action"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2010,
+    rating: 9,
+    review_text: "Тысячи смертей, секундные уровни и гениальный дизайн.",
+    review_author: "Riot Pixels",
+    store_links: { steam: "https://store.steampowered.com/app/40800/Super_Meat_Boy/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/40800/header.jpg"
+  },
+  {
+    title: "Limbo",
+    description_short: "Мрачный и минималистичный пазл-платформер от студии Playdead.",
+    genres: ["Puzzle", "Platformer", "Dark"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch", "Mobile"],
+    release_year: 2010,
+    rating: 8,
+    review_text: "Чёрно-белая атмосфера, жуткие пауки и гениальные загадки.",
+    review_author: "StopGame.ru",
+    store_links: { steam: "https://store.steampowered.com/app/48000/Limbo/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/48000/header.jpg"
+  },
+  {
+    title: "Inside",
+    description_short: "Идейный сиквел Limbo с гнетущей атмосферой антиутопии.",
+    genres: ["Puzzle", "Platformer", "Dark"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2016,
+    rating: 9,
+    review_text: "Мрачно, загадочно, идеально. Каждая минута — напряжение.",
+    review_author: "IGN",
+    store_links: { steam: "https://store.steampowered.com/app/304430/Inside/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/304430/header.jpg"
+  },
+  {
+    title: "Fez",
+    description_short: "Пространственная головоломка, завязанная на переключении 2D и 3D перспектив.",
+    genres: ["Puzzle", "Platformer", "Exploration"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2013,
+    rating: 8,
+    review_text: "Ошеломляющий дизайн уровней. Вращай мир и ищи секреты.",
+    review_author: "StopGame.ru",
+    store_links: { steam: "https://store.steampowered.com/app/224760/Fez/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/224760/header.jpg"
+  },
+  {
+    title: "Shovel Knight: Treasure Trove",
+    description_short: "Лучшее любовное послание классическим 8-битным платформерам.",
+    genres: ["Platformer", "Action", "Retro"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2014,
+    rating: 9,
+    review_text: "Ностальгия с современным управлением. Множество кампаний, отличный саундтрек.",
+    review_author: "Riot Pixels",
+    store_links: { steam: "https://store.steampowered.com/app/250760/Shovel_Knight_Treasure_Trove/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/250760/header.jpg"
+  },
+  {
+    title: "The Messenger",
+    description_short: "Платформер, изящно эволюционирующий из 8-битного в 16-битный мир.",
+    genres: ["Platformer", "Metroidvania", "Retro"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2018,
+    rating: 8,
+    review_text: "Сначала линейный платформер, потом метроидвания. Остроумно и сложно.",
+    review_author: "Kanobu.ru",
+    store_links: { steam: "https://store.steampowered.com/app/764790/The_Messenger/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/764790/header.jpg"
+  },
+  {
+    title: "Rain World",
+    description_short: "Симулятор выживания милого слизнекота в экосистеме жестокого мира.",
+    genres: ["Platformer", "Survival", "Metroidvania"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2017,
+    rating: 8,
+    review_text: "Мир живёт своей жизнью. Неистово сложно, но невероятно атмосферно.",
+    review_author: "DTF",
+    store_links: { steam: "https://store.steampowered.com/app/312520/Rain_World/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/312520/header.jpg"
+  },
+  {
+    title: "To the Moon",
+    description_short: "Трогательная интерактивная история о последнем желании умирающего человека.",
+    genres: ["RPG", "Narrative", "Emotional"],
+    platforms: ["PC", "Mobile", "Nintendo Switch"],
+    release_year: 2011,
+    rating: 9,
+    review_text: "Не игра, а эмоция. Рассказывает историю, способную разрыдаться.",
+    review_author: "StopGame.ru",
+    store_links: { steam: "https://store.steampowered.com/app/206440/To_the_Moon/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/206440/header.jpg"
+  },
+  {
+    title: "Omori",
+    description_short: "Психологический хоррор и RPG о борьбе с депрессией и чувством вины.",
+    genres: ["RPG", "Psychological Horror", "Narrative"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2020,
+    rating: 9,
+    review_text: "Душераздирающая история, прекрасный визуал и незабываемый саундтрек.",
+    review_author: "IGN",
+    store_links: { steam: "https://store.steampowered.com/app/1150690/OMORI/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1150690/header.jpg"
+  },
+  {
+    title: "Slay the Princess",
+    description_short: "Текстовый хоррор-квест с множеством выборов и отличным юмором.",
+    genres: ["Visual Novel", "Horror", "Choice-based"],
+    platforms: ["PC", "Nintendo Switch"],
+    release_year: 2023,
+    rating: 8,
+    review_text: "Десятки концовок, голоса, и принцесса, которую нельзя убить.",
+    review_author: "DTF",
+    store_links: { steam: "https://store.steampowered.com/app/1989270/Slay_the_Princess/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1989270/header.jpg"
+  },
+  {
+    title: "Kentucky Route Zero",
+    description_short: "Сюрреалистическое роуд-муви по скрытым дорогам Америки.",
+    genres: ["Adventure", "Point-and-Click", "Surreal"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2020,
+    rating: 8,
+    review_text: "Магический реализм, поэзия и нестандартное повествование.",
+    review_author: "Riot Pixels",
+    store_links: { steam: "https://store.steampowered.com/app/231200/Kentucky_Route_Zero/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/231200/header.jpg"
+  },
+  {
+    title: "Night in the Woods",
+    description_short: "Меланхоличная история о взрослении, возвращении домой и котиках.",
+    genres: ["Adventure", "Narrative", "Exploration"],
+    platforms: ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+    release_year: 2017,
+    rating: 8,
+    review_text: "Диалоги, музыка, атмосфера маленького городка. Тёплая грусть.",
+    review_author: "DTF",
+    store_links: { steam: "https://store.steampowered.com/app/481510/Night_in_the_Woods/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/481510/header.jpg"
+  },
+  {
     title: "Chained Echoes",
     description_short: "Современная дань уважения классическим JRPG эпохи SNES.",
     genres: ["RPG", "Turn-based", "Retro"],
@@ -683,7 +732,8 @@ const games = [
     rating: 9,
     review_text: "Огромный мир, механика перегрева и захватывающий сюжет.",
     review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/1229240/Chained_Echoes/" }
+    store_links: { steam: "https://store.steampowered.com/app/1229240/Chained_Echoes/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1229240/header.jpg"
   },
   {
     title: "Sea of Stars",
@@ -694,7 +744,8 @@ const games = [
     rating: 9,
     review_text: "Красивейшая пиксельная графика, динамичные бои и приключения.",
     review_author: "IGN",
-    store_links: { steam: "https://store.steampowered.com/app/1244090/Sea_of_Stars/" }
+    store_links: { steam: "https://store.steampowered.com/app/1244090/Sea_of_Stars/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1244090/header.jpg"
   },
   {
     title: "Dave the Diver",
@@ -705,7 +756,8 @@ const games = [
     rating: 9,
     review_text: "Днём ловишь рыбу, ночью готовишь суши. Невероятно затягивает.",
     review_author: "DTF",
-    store_links: { steam: "https://store.steampowered.com/app/1868140/Dave_the_Diver/" }
+    store_links: { steam: "https://store.steampowered.com/app/1868140/Dave_the_Diver/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1868140/header.jpg"
   },
   {
     title: "Dredge",
@@ -716,7 +768,8 @@ const games = [
     rating: 8,
     review_text: "Рыбалка днём, страх ночью. Атмосферный морской хоррор.",
     review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/1562430/Dredge/" }
+    store_links: { steam: "https://store.steampowered.com/app/1562430/Dredge/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1562430/header.jpg"
   },
   {
     title: "The Stanley Parable: Ultra Deluxe",
@@ -727,7 +780,8 @@ const games = [
     rating: 9,
     review_text: "Что если у нарратива есть своё мнение? Остроумно, странно, незабываемо.",
     review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/1703340/The_Stanley_Parable_Ultra_Deluxe/" }
+    store_links: { steam: "https://store.steampowered.com/app/1703340/The_Stanley_Parable_Ultra_Deluxe/" },
+    image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1703340/header.jpg?t=1712065263" // Картинка для этой игры не найдена
   },
   {
     title: "Terraria",
@@ -738,7 +792,8 @@ const games = [
     rating: 10,
     review_text: "Тысячи предметов, строительство, исследования. Бесконечная игра.",
     review_author: "IGN",
-    store_links: { steam: "https://store.steampowered.com/app/105600/Terraria/" }
+    store_links: { steam: "https://store.steampowered.com/app/105600/Terraria/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/105600/header.jpg"
   },
   {
     title: "Valheim",
@@ -749,7 +804,8 @@ const games = [
     rating: 9,
     review_text: "Длинные дома, море и драугры. Атмосфера и чувство приключения.",
     review_author: "Kanobu.ru",
-    store_links: { steam: "https://store.steampowered.com/app/892970/Valheim/" }
+    store_links: { steam: "https://store.steampowered.com/app/892970/Valheim/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/892970/header.jpg"
   },
   {
     title: "The Forest",
@@ -760,7 +816,8 @@ const games = [
     rating: 8,
     review_text: "Строй, защищайся, спускайся в пещеры. Атмосфера паранойи.",
     review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/242760/The_Forest/" }
+    store_links: { steam: "https://store.steampowered.com/app/242760/The_Forest/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/242760/header.jpg"
   },
   {
     title: "Sons of the Forest",
@@ -771,7 +828,8 @@ const games = [
     rating: 8,
     review_text: "Больше возможностей, мутанты и компаньон Кельвин. Страшно и весело.",
     review_author: "DTF",
-    store_links: { steam: "https://store.steampowered.com/app/1326470/Sons_of_The_Forest/" }
+    store_links: { steam: "https://store.steampowered.com/app/1326470/Sons_of_The_Forest/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1326470/header.jpg"
   },
   {
     title: "The Long Dark",
@@ -782,7 +840,8 @@ const games = [
     rating: 8,
     review_text: "Одиночество, холод и волки. Лучший симулятор выживания без зомби.",
     review_author: "Riot Pixels",
-    store_links: { steam: "https://store.steampowered.com/app/305620/The_Long_Dark/" }
+    store_links: { steam: "https://store.steampowered.com/app/305620/The_Long_Dark/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/305620/header.jpg"
   },
   {
     title: "Project Zomboid",
@@ -793,7 +852,8 @@ const games = [
     rating: 9,
     review_text: "Подробная медицина, крафт, строительство. Смерть неизбежна, но процесс великолепен.",
     review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/108600/Project_Zomboid/" }
+    store_links: { steam: "https://store.steampowered.com/app/108600/Project_Zomboid/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/108600/header.jpg"
   },
   {
     title: "Factorio",
@@ -804,7 +864,8 @@ const games = [
     rating: 10,
     review_text: "Кракен автоматизации. Затягивает на сотни часов. Оптимизация — рай.",
     review_author: "IGN",
-    store_links: { steam: "https://store.steampowered.com/app/427520/Factorio/" }
+    store_links: { steam: "https://store.steampowered.com/app/427520/Factorio/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/427520/header.jpg"
   },
   {
     title: "Rust",
@@ -815,7 +876,8 @@ const games = [
     rating: 7,
     review_text: "Токсичное сообщество, но невероятно напряжённые моменты. Выжить — уже победа.",
     review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/252490/Rust/" }
+    store_links: { steam: "https://store.steampowered.com/app/252490/Rust/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252490/header.jpg"
   },
   {
     title: "Slime Rancher",
@@ -826,7 +888,8 @@ const games = [
     rating: 8,
     review_text: "Антистресс, милота и экономика. Отличное настроение гарантировано.",
     review_author: "DTF",
-    store_links: { steam: "https://store.steampowered.com/app/433340/Slime_Rancher/" }
+    store_links: { steam: "https://store.steampowered.com/app/433340/Slime_Rancher/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/433340/header.jpg"
   },
   {
     title: "Untitled Goose Game",
@@ -837,7 +900,8 @@ const games = [
     rating: 8,
     review_text: "Гусь — зло. Коротко, смешно и оригинально.",
     review_author: "Riot Pixels",
-    store_links: { steam: "https://store.steampowered.com/app/837470/Untitled_Goose_Game/" }
+    store_links: { steam: "https://store.steampowered.com/app/837470/Untitled_Goose_Game/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/837470/header.jpg"
   },
   {
     title: "Superhot",
@@ -848,7 +912,8 @@ const games = [
     rating: 8,
     review_text: "Управляй временем, ломай врагов. Очень стильно и необычно.",
     review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/322500/SUPERHOT/" }
+    store_links: { steam: "https://store.steampowered.com/app/322500/SUPERHOT/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/322500/header.jpg"
   },
   {
     title: "Amnesia: The Dark Descent",
@@ -859,7 +924,8 @@ const games = [
     rating: 8,
     review_text: "Бежать, прятаться, бояться. Классика современного хоррора.",
     review_author: "IGN",
-    store_links: { steam: "https://store.steampowered.com/app/57300/Amnesia_The_Dark_Descent/" }
+    store_links: { steam: "https://store.steampowered.com/app/57300/Amnesia_The_Dark_Descent/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/57300/header.jpg"
   },
   {
     title: "Furi",
@@ -870,7 +936,8 @@ const games = [
     rating: 8,
     review_text: "Только боссы, музыка и атмосфера. Сложно, затягивает.",
     review_author: "DTF",
-    store_links: { steam: "https://store.steampowered.com/app/423230/Furi/" }
+    store_links: { steam: "https://store.steampowered.com/app/423230/Furi/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/423230/header.jpg"
   },
   {
     title: "My Friend Pedro",
@@ -881,7 +948,8 @@ const games = [
     rating: 7,
     review_text: "Акробатика, замедление времени и банан. Безумное удовольствие.",
     review_author: "Riot Pixels",
-    store_links: { steam: "https://store.steampowered.com/app/557340/My_Friend_Pedro/" }
+    store_links: { steam: "https://store.steampowered.com/app/557340/My_Friend_Pedro/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/557340/header.jpg"
   },
   {
     title: "Teardown",
@@ -892,7 +960,8 @@ const games = [
     rating: 8,
     review_text: "Разрушай всё, планируй маршрут. Очень физично и креативно.",
     review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/1167630/Teardown/" }
+    store_links: { steam: "https://store.steampowered.com/app/1167630/Teardown/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1167630/header.jpg"
   },
   {
     title: "Phasmophobia",
@@ -903,7 +972,8 @@ const games = [
     rating: 8,
     review_text: "Используй приборы, общайся с призраками. Страшно с друзьями.",
     review_author: "IGN",
-    store_links: { steam: "https://store.steampowered.com/app/739630/Phasmophobia/" }
+    store_links: { steam: "https://store.steampowered.com/app/739630/Phasmophobia/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/739630/header.jpg"
   },
   {
     title: "Lethal Company",
@@ -914,7 +984,8 @@ const games = [
     rating: 8,
     review_text: "Смешно и страшно одновременно. Крики в рации и монстры.",
     review_author: "DTF",
-    store_links: { steam: "https://store.steampowered.com/app/1966720/Lethal_Company/" }
+    store_links: { steam: "https://store.steampowered.com/app/1966720/Lethal_Company/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1966720/header.jpg"
   },
   {
     title: "Sifu",
@@ -925,7 +996,8 @@ const games = [
     rating: 8,
     review_text: "Каждая смерть старит тебя, но добавляет опыта. Стильные бои.",
     review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/2138710/Sifu/" }
+    store_links: { steam: "https://store.steampowered.com/app/2138710/Sifu/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2138710/header.jpg"
   },
   {
     title: "Ghostrunner",
@@ -936,7 +1008,8 @@ const games = [
     rating: 8,
     review_text: "Быстрее, выше, сильнее. Одна смерть — перезапуск уровня.",
     review_author: "Riot Pixels",
-    store_links: { steam: "https://store.steampowered.com/app/1139900/Ghostrunner/" }
+    store_links: { steam: "https://store.steampowered.com/app/1139900/Ghostrunner/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1139900/header.jpg"
   },
   {
     title: "Abzû",
@@ -947,7 +1020,8 @@ const games = [
     rating: 8,
     review_text: "Плавание среди китов, красивая музыка и никакого стресса.",
     review_author: "IGN",
-    store_links: { steam: "https://store.steampowered.com/app/384190/Abzu/" }
+    store_links: { steam: "https://store.steampowered.com/app/384190/Abzu/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/384190/header.jpg"
   },
   {
     title: "Townscaper",
@@ -958,7 +1032,8 @@ const games = [
     rating: 8,
     review_text: "Рисуй города на воде, наслаждайся уютом. Идеально для релакса.",
     review_author: "DTF",
-    store_links: { steam: "https://store.steampowered.com/app/1267910/Townscaper/" }
+    store_links: { steam: "https://store.steampowered.com/app/1267910/Townscaper/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1267910/header.jpg"
   },
   {
     title: "Pony Island",
@@ -969,7 +1044,8 @@ const games = [
     rating: 8,
     review_text: "Не верь пони. Ломай систему, взламывай код, ужасайся.",
     review_author: "StopGame.ru",
-    store_links: { steam: "https://store.steampowered.com/app/405640/Pony_Island/" }
+    store_links: { steam: "https://store.steampowered.com/app/405640/Pony_Island/" },
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/405640/header.jpg"
   },
   {
     title: "The Beginner's Guide",
@@ -980,10 +1056,10 @@ const games = [
     rating: 8,
     review_text: "Не игра, а исповедь. Глубоко, грустно и заставляет задуматься.",
     review_author: "Riot Pixels",
-    store_links: { steam: "https://store.steampowered.com/app/303210/The_Beginners_Guide/" }
+    store_links: { steam: "https://store.steampowered.com/app/303210/The_Beginners_Guide/" },
+    image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/303210/header.jpg?t=1765833998" // Картинка для этой игры не найдена
   }
 ];
-
 
     // ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
     function getUniqueGenres() {
@@ -1097,6 +1173,7 @@ const games = [
            
             html += `
                 <div class="game-card">
+                 ${game.image ? `<img src="${game.image}" alt="${game.title}">` : ''}
                     <div class="card-content">
                         <div class="game-title">${game.title}</div>
                         <div class="game-year">📅 ${game.release_year}</div>
